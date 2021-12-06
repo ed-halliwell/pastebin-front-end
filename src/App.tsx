@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { ISnippet } from "./utils/interfaces";
 import SnippetList from "./components/SnippetList";
+import CreateSnippet from "./components/CreateSnippet";
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
+
   const loadDataFromEndpoint = async (endpoint: string) => {
     try {
       const res = await axios.get(
         `https://pastebin-academy.herokuapp.com/${endpoint}`
       );
-      // console.log(res.data.data);
       setSnippets(res.data.data);
     } catch (err) {
       if (err instanceof Error) {
@@ -18,16 +19,19 @@ function App(): JSX.Element {
       }
     }
   };
-  loadDataFromEndpoint("snippets");
+
+  useEffect(() => {
+    console.log("UseEffect is firing");
+    loadDataFromEndpoint("snippets");
+  }, []);
 
   return (
     <>
+      <CreateSnippet />
       <SnippetList snippets={snippets} />
     </>
   );
 }
-
-export default App;
 
 // App
 //   > Form - creating a snippet
