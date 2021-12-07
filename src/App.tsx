@@ -24,19 +24,22 @@ export default function App(): JSX.Element {
   };
 
   useEffect(() => {
-    console.log("UseEffect is firing");
+    //console.log("UseEffect is firing");
     loadDataFromEndpoint("snippets");
   }, []);
 
   const handleClickOnSnippet = (snippet: ISnippet) => {
-    console.log("A snippet was clicked!:", snippet.id);
+    //console.log("A snippet was clicked!:", snippet.id);
     setSelectedSnippet(snippet);
+  };
+
+  const handleCreateClick = () => {
+    setSelectedSnippet(undefined);
   };
 
   return (
     <>
-      <NavBar />
-
+      <NavBar handleCreateClick={handleCreateClick} />
       <div className="container mt-5">
         <div className="row mx-auto">
           <div className="col-4">
