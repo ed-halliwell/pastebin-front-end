@@ -53,9 +53,11 @@ export default function CreateSnippet(): JSX.Element {
               ></textarea>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Save
-          </button>
+          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button className="btn btn-primary me-md-2" type="submit">
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </>

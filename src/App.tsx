@@ -33,7 +33,10 @@ export default function App(): JSX.Element {
       <div className="container mt-5">
         <div className="row mx-auto">
           <div className="col-4">
-            <SnippetList snippets={snippets} />
+            <SnippetList
+              snippets={snippets}
+              // handleClickOnSnippet={handleClickOnSnippet}
+            />
           </div>
           <div className="col-8">
             <CreateSnippet />
