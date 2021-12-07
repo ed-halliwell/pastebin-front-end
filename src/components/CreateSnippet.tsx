@@ -21,19 +21,45 @@ export default function CreateSnippet(): JSX.Element {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Add a title"
-          value={titleInput}
-          onChange={(e) => setTitleInput(e.target.value)}
-        />
-        <textarea
-          value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
-        />
-        <button type="submit">Save</button>
-      </form>
+      <div className="col-6 mx-4 w-100">
+        <h4 className="mb-4">Create New Snippet</h4>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="snippet-title" className="form-label">
+              Snippet Title
+            </label>
+            <input
+              value={titleInput}
+              onChange={(e) => setTitleInput(e.target.value)}
+              type="text"
+              placeholder="Add a title"
+              className="form-control"
+              id="snippet-title"
+              aria-describedby="snippet-title"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="snippet-text" className="form-label">
+              Snippet Text
+            </label>
+            <div className="input-group">
+              <textarea
+                value={textInput}
+                placeholder="Paste something..."
+                onChange={(e) => setTextInput(e.target.value)}
+                id="snippet-text"
+                className="form-control"
+                aria-label="snippet"
+              ></textarea>
+            </div>
+          </div>
+          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button className="btn btn-primary me-md-2" type="submit">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

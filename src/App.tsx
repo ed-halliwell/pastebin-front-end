@@ -3,6 +3,7 @@ import axios from "axios";
 import { ISnippet } from "./utils/interfaces";
 import SnippetList from "./components/SnippetList";
 import CreateSnippet from "./components/CreateSnippet";
+import NavBar from "./components/NavBar";
 
 export default function App(): JSX.Element {
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
@@ -27,13 +28,21 @@ export default function App(): JSX.Element {
 
   return (
     <>
-      <CreateSnippet />
-      <SnippetList snippets={snippets} />
+      <NavBar />
+
+      <div className="container mt-5">
+        <div className="row mx-auto">
+          <div className="col-4">
+            <SnippetList
+              snippets={snippets}
+              // handleClickOnSnippet={handleClickOnSnippet}
+            />
+          </div>
+          <div className="col-8">
+            <CreateSnippet />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
-
-// App
-//   > Form - creating a snippet
-//   > List of Snippets (ordered by createdAt desc)
-//     > Snippet - can be expanded
