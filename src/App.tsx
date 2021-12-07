@@ -4,9 +4,11 @@ import { ISnippet } from "./utils/interfaces";
 import SnippetList from "./components/SnippetList";
 import CreateSnippet from "./components/CreateSnippet";
 import NavBar from "./components/NavBar";
+import ViewSnippet from "./components/ViewSnippet";
 
 export default function App(): JSX.Element {
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
+  const [selectedSnippet, setSelectedSnippet] = useState<ISnippet>();
 
   const loadDataFromEndpoint = async (endpoint: string) => {
     try {
@@ -26,6 +28,11 @@ export default function App(): JSX.Element {
     loadDataFromEndpoint("snippets");
   }, []);
 
+  const handleClickOnSnippet = (snippet: ISnippet) => {
+    console.log("A snippet was clicked!:", snippet.id);
+    setSelectedSnippet(snippet);
+  };
+
   return (
     <>
       <NavBar />
@@ -35,11 +42,13 @@ export default function App(): JSX.Element {
           <div className="col-4">
             <SnippetList
               snippets={snippets}
-              // handleClickOnSnippet={handleClickOnSnippet}
+              selectedSnippet={selectedSnippet}
+              handleClickOnSnippet={handleClickOnSnippet}
             />
           </div>
           <div className="col-8">
-            <CreateSnippet />
+            {!selectedSnippet && <CreateSnippet />}
+            {selectedSnippet && <ViewSnippet snippet={selectedSnippet} />}
           </div>
         </div>
       </div>

@@ -1,21 +1,14 @@
-import { useState } from "react";
 import { ISnippet } from "../utils/interfaces";
 import timestampConverter from "../utils/timestampConverter";
 import "../styles/SnippetList.css";
 
 interface SnippetListProps {
   snippets: ISnippet[];
-  //   handleClickOnSnippet: (snippetId: number) => void;
+  selectedSnippet: ISnippet | undefined;
+  handleClickOnSnippet: (snippet: ISnippet) => void;
 }
 
 export default function SnippetList(props: SnippetListProps): JSX.Element {
-  const [activeSnippet, setActiveSnippet] = useState<number>(-1);
-
-  const handleClickOnSnippet = (snippetId: number) => {
-    console.log("A snippet was clicked!:", snippetId);
-    setActiveSnippet(snippetId);
-  };
-
   return (
     <>
       <div>
@@ -25,11 +18,13 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
             <li
               key={snippet.id}
               className={
-                activeSnippet === snippet.id
-                  ? "list-group-item d-flex justify-content-between align-items-start active"
-                  : "list-group-item d-flex justify-content-between align-items-start"
+                "list-group-item d-flex justify-content-between align-items-start " +
+                (props.selectedSnippet &&
+                props.selectedSnippet.id === snippet.id
+                  ? "active"
+                  : "")
               }
-              onClick={() => handleClickOnSnippet(snippet.id)}
+              onClick={() => props.handleClickOnSnippet(snippet)}
             >
               <div className="ms-2 me-auto">
                 <div className="fw-bold ">{snippet.title}</div>
