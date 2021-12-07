@@ -3,6 +3,7 @@ import axios from "axios";
 import { ISnippet } from "./utils/interfaces";
 import SnippetList from "./components/SnippetList";
 import CreateSnippet from "./components/CreateSnippet";
+import NavBar from "./components/NavBar";
 
 export default function App(): JSX.Element {
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
@@ -27,35 +28,18 @@ export default function App(): JSX.Element {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            PasteBin
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarColor01"
-            aria-controls="navbarColor01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+      <NavBar />
+
+      <div className="container mt-5">
+        <div className="row mx-auto">
+          <div className="col-4">
+            <SnippetList snippets={snippets} />
+          </div>
+          <div className="col-8">
+            <CreateSnippet />
+          </div>
         </div>
-      </nav>
-      <div className="container-md">
-        <CreateSnippet />
-      </div>
-      <div className="container-md">
-        <SnippetList snippets={snippets} />
       </div>
     </>
   );
 }
-
-// App
-//   > Form - creating a snippet
-//   > List of Snippets (ordered by createdAt desc)
-//     > Snippet - can be expanded
