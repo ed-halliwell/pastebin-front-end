@@ -20,3 +20,7 @@
 .create-snippet-box {
   height: 46vh;
 }
+
+.copyIcon:hover {
+  color: rgba(161, 175, 177, 0.9);
+}

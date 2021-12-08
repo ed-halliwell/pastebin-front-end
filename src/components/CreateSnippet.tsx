@@ -2,7 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import "../styles/CreateSnippet.css";
 
-export default function CreateSnippet(): JSX.Element {
+interface Props {
+  handleGetSnippets: (endpoint: string) => void;
+}
+
+export default function CreateSnippet(props: Props): JSX.Element {
   const [titleInput, setTitleInput] = useState<string>("");
   const [textInput, setTextInput] = useState<string>("");
 
@@ -18,6 +22,7 @@ export default function CreateSnippet(): JSX.Element {
       });
     setTitleInput("");
     setTextInput("");
+    props.handleGetSnippets("snippets");
   };
 
   return (
@@ -47,6 +52,7 @@ export default function CreateSnippet(): JSX.Element {
               </label>
               <div className="input-group create-snippet-box">
                 <textarea
+                  autoFocus
                   value={textInput}
                   placeholder="Paste something..."
                   onChange={(e) => setTextInput(e.target.value)}
@@ -58,6 +64,13 @@ export default function CreateSnippet(): JSX.Element {
               </div>
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button
+                className="btn btn-secondary me-md-2"
+                onClick={() => setTextInput("")}
+                type="button"
+              >
+                Clear Input
+              </button>
               <button className="btn btn-primary me-md-2" type="submit">
                 Save
               </button>

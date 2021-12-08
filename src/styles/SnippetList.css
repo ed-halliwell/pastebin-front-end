@@ -14,3 +14,13 @@
   border-bottom: 1px lightgrey solid;
   box-shadow: 5px 4px 5px -1px rgba(0, 0, 0, 0.3);
 }
+
+.snippet-fragment {
+  overflow-wrap: break-word;
+  font-size: small;
+  color: grey;
+}
+
+.snippet-list {
+  max-width: 70%;
+}

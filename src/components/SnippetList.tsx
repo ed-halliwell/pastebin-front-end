@@ -10,8 +10,8 @@ interface SnippetListProps {
 
 export default function SnippetList(props: SnippetListProps): JSX.Element {
   function trimSnippetText(snippetText: string): string {
-    return snippetText.length > 20
-      ? snippetText.substring(0, 25) + "..."
+    return snippetText.length > 45
+      ? snippetText.substring(0, 50) + "..."
       : snippetText;
   }
 
@@ -34,7 +34,7 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
                 }
                 onClick={() => props.handleClickOnSnippet(snippet)}
               >
-                <div className="ms-2 me-auto">
+                <div className="ms-2 me-auto snippet-list">
                   <div className="fw-bold ">{snippet.title}</div>
                   <p className="monospace-text snippet-fragment">
                     {trimSnippetText(snippet.text)}
