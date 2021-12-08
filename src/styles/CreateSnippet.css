@@ -1,0 +1,7 @@
+.create-snippet-box {
+  height: 46vh;
+}
+.create-snippet-text {
+  font-family: monospace;
+  padding: 8px;
+}

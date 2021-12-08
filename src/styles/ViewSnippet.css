@@ -1,0 +1,22 @@
+.view-box {
+  box-shadow: 5px 4px 5px -1px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border: 1px lightgrey solid;
+}
+
+.snippet-box {
+  border: 1px lightgrey solid;
+  height: 46vh;
+}
+.snippet-text {
+  font-family: monospace;
+  padding: 8px;
+  overflow: scroll;
+  word-break: break-all;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+.create-snippet-box {
+  height: 46vh;
+}

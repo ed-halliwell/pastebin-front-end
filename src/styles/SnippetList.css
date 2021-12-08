@@ -8,3 +8,9 @@
 .list-group-item {
   cursor: pointer;
 }
+
+.overflow-auto {
+  max-height: 72vh;
+  border-bottom: 1px lightgrey solid;
+  box-shadow: 5px 4px 5px -1px rgba(0, 0, 0, 0.3);
+}
