@@ -24,7 +24,7 @@ export default function App(): JSX.Element {
   };
 
   useEffect(() => {
-    //console.log("UseEffect is firing");
+    console.log("UseEffect is firing");
     loadDataFromEndpoint("snippets");
   }, []);
 
