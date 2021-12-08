@@ -5,6 +5,7 @@ import "../styles/ViewSnippet.css";
 
 interface Props {
   snippet: ISnippet;
+  handleGetSnippets: (endpoint: string) => void;
 }
 
 export default function ViewSnippet(props: Props): JSX.Element {
@@ -32,6 +33,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
         console.log(error);
       });
     setEdit(false);
+    props.handleGetSnippets("snippets");
   };
 
   return (
@@ -92,14 +94,14 @@ export default function ViewSnippet(props: Props): JSX.Element {
               <label htmlFor="snippet-title" className="form-label">
                 Snippet Title
               </label>
-              <p>{props.snippet.title}</p>
+              <p>{title}</p>
             </div>
             <div className="mb-3">
               <label htmlFor="snippet-text" className="form-label">
                 Snippet Text
               </label>
               <div className="snippet-box">
-                <p className="snippet-text">{props.snippet.text}</p>
+                <p className="snippet-text">{text}</p>
               </div>
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">

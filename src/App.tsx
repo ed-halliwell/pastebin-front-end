@@ -50,8 +50,15 @@ export default function App(): JSX.Element {
             />
           </div>
           <div className="col-8">
-            {!selectedSnippet && <CreateSnippet />}
-            {selectedSnippet && <ViewSnippet snippet={selectedSnippet} />}
+            {!selectedSnippet && (
+              <CreateSnippet handleGetSnippets={loadDataFromEndpoint} />
+            )}
+            {selectedSnippet && (
+              <ViewSnippet
+                snippet={selectedSnippet}
+                handleGetSnippets={loadDataFromEndpoint}
+              />
+            )}
           </div>
         </div>
       </div>

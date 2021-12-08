@@ -2,7 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import "../styles/CreateSnippet.css";
 
-export default function CreateSnippet(): JSX.Element {
+interface Props {
+  handleGetSnippets: (endpoint: string) => void;
+}
+
+export default function CreateSnippet(props: Props): JSX.Element {
   const [titleInput, setTitleInput] = useState<string>("");
   const [textInput, setTextInput] = useState<string>("");
 
@@ -18,6 +22,7 @@ export default function CreateSnippet(): JSX.Element {
       });
     setTitleInput("");
     setTextInput("");
+    props.handleGetSnippets("snippets");
   };
 
   return (
