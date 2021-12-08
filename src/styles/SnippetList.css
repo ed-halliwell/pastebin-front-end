@@ -16,5 +16,11 @@
 }
 
 .snippet-fragment {
-  width: 70%;
+  overflow-wrap: break-word;
+  font-size: small;
+  color: grey;
+}
+
+.snippet-list {
+  max-width: 70%;
 }
