@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-regular-svg-icons";
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
@@ -18,7 +19,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
     setText(props.snippet.text);
   }, [props.snippet]);
 
-  //PATCH CALL
+  //PATCH CALL with GET to refresh list of snippets
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios
@@ -35,6 +36,14 @@ export default function ViewSnippet(props: Props): JSX.Element {
     setEdit(false);
     props.handleGetSnippets("snippets");
   };
+
+  function copyToClipboard() {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(text);
+
+    /* Alert the copied text */
+    // alert("Copied the text: " + text);
+  }
 
   return (
     <>
@@ -59,7 +68,12 @@ export default function ViewSnippet(props: Props): JSX.Element {
               </div>
               <div className="mb-3">
                 <label htmlFor="snippet-text" className="form-label">
-                  Snippet Text
+                  Snippet Text{" "}
+                  <FontAwesomeIcon
+                    icon={faCopy}
+                    className="copyIcon"
+                    onClick={copyToClipboard}
+                  />
                 </label>
                 <div className="input-group create-snippet-box">
                   <textarea
@@ -98,7 +112,12 @@ export default function ViewSnippet(props: Props): JSX.Element {
             </div>
             <div className="mb-3">
               <label htmlFor="snippet-text" className="form-label">
-                Snippet Text
+                Snippet Text{" "}
+                <FontAwesomeIcon
+                  icon={faCopy}
+                  className="copyIcon"
+                  onClick={copyToClipboard}
+                />
               </label>
               <div className="snippet-box">
                 <p className="snippet-text">{text}</p>
