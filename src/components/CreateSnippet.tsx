@@ -64,6 +64,13 @@ export default function CreateSnippet(props: Props): JSX.Element {
               </div>
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button
+                className="btn btn-secondary me-md-2"
+                onClick={() => setTextInput("")}
+                type="button"
+              >
+                Clear Input
+              </button>
               <button className="btn btn-primary me-md-2" type="submit">
                 Save
               </button>
