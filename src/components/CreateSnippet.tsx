@@ -47,6 +47,7 @@ export default function CreateSnippet(): JSX.Element {
               </label>
               <div className="input-group create-snippet-box">
                 <textarea
+                  autoFocus
                   value={textInput}
                   placeholder="Paste something..."
                   onChange={(e) => setTextInput(e.target.value)}
