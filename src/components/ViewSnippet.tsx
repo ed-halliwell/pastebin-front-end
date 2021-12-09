@@ -4,11 +4,14 @@ import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
   handleRefreshAfterAction: () => void;
 }
+
+const baseUrl = process.env.API_URL;
 
 export default function ViewSnippet(props: Props): JSX.Element {
   const [title, setTitle] = useState<string>(props.snippet.title);
@@ -24,13 +27,10 @@ export default function ViewSnippet(props: Props): JSX.Element {
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios
-      .patch(
-        `https://pastebin-academy.herokuapp.com/snippets/${props.snippet.id}`,
-        {
-          title: title,
-          text: text,
-        }
-      )
+      .patch(`${baseUrl}/snippets/${props.snippet.id}`, {
+        title: title,
+        text: text,
+      })
       .catch(function (error) {
         console.log(error);
       });
@@ -46,9 +46,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
 
   const handleDelete = async () => {
     await axios
-      .delete(
-        `https://pastebin-academy.herokuapp.com/snippets/${props.snippet.id}`
-      )
+      .delete(`${baseUrl}/snippets/${props.snippet.id}`)
       .catch(function (error) {
         console.log(error);
       });

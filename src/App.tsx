@@ -6,15 +6,15 @@ import CreateSnippet from "./components/CreateSnippet";
 import NavBar from "./components/NavBar";
 import ViewSnippet from "./components/ViewSnippet";
 
+const baseUrl = process.env.API_URL;
+
 export default function App(): JSX.Element {
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
   const [selectedSnippet, setSelectedSnippet] = useState<ISnippet>();
 
   const loadDataFromEndpoint = async (endpoint: string) => {
     try {
-      const res = await axios.get(
-        `https://pastebin-academy.herokuapp.com/${endpoint}?limit=100`
-      );
+      const res = await axios.get(`${baseUrl}/${endpoint}?limit=100`);
       setSnippets(res.data.data);
     } catch (err) {
       if (err instanceof Error) {
