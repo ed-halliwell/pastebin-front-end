@@ -7,13 +7,14 @@
 .snippet-box {
   border: 1px lightgrey solid;
   height: 46vh;
+  overflow: scroll;
 }
 .snippet-text {
   font-family: monospace;
   padding: 8px;
   overflow: scroll;
   word-break: break-all;
-  white-space: normal;
+  white-space: pre-wrap;
   text-overflow: ellipsis;
 }
 
