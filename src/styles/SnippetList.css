@@ -24,3 +24,7 @@
 .snippet-list {
   max-width: 70%;
 }
+
+.active {
+  color: white;
+}

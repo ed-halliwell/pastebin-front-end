@@ -36,7 +36,16 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
               >
                 <div className="ms-2 me-auto snippet-list">
                   <div className="fw-bold ">{snippet.title}</div>
-                  <p className="monospace-text snippet-fragment">
+                  <p
+                    className={
+                      "monospace-text snippet-fragment " +
+                      (props.selectedSnippet &&
+                      props.selectedSnippet.id === snippet.id
+                        ? "active"
+                        : "")
+                    }
+                  >
+                    {/* <p className="monospace-text snippet-fragment"> */}
                     {trimSnippetText(snippet.text)}
                   </p>
                 </div>

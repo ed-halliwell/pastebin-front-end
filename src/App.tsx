@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
   const loadDataFromEndpoint = async (endpoint: string) => {
     try {
       const res = await axios.get(
-        `https://pastebin-academy.herokuapp.com/${endpoint}`
+        `https://pastebin-academy.herokuapp.com/${endpoint}?limit=100`
       );
       setSnippets(res.data.data);
     } catch (err) {
