@@ -1,5 +1,5 @@
 interface Props {
-  handleCreateClick: () => void;
+  handleRefreshAfterAction: () => void;
 }
 
 export default function NavBar(props: Props): JSX.Element {
@@ -7,7 +7,7 @@ export default function NavBar(props: Props): JSX.Element {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container justify-content-between">
         <a className="navbar-brand" href="/">
-          📋 PasteBin
+          📋 &nbsp; PasteBin
         </a>
         <button
           className="navbar-toggler"
@@ -23,7 +23,7 @@ export default function NavBar(props: Props): JSX.Element {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => props.handleCreateClick()}
+          onClick={() => props.handleRefreshAfterAction()}
         >
           Create New Snippet
         </button>

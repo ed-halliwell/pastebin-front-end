@@ -7,7 +7,7 @@ import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
-  handleDeleteReload: () => void;
+  handleRefreshAfterAction: () => void;
 }
 
 export default function ViewSnippet(props: Props): JSX.Element {
@@ -54,7 +54,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
       });
     setEdit(false);
     props.handleGetSnippets("snippets");
-    props.handleDeleteReload();
+    props.handleRefreshAfterAction();
   };
 
   return (

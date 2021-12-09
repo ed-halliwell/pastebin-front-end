@@ -24,7 +24,7 @@ export default function App(): JSX.Element {
   };
 
   useEffect(() => {
-    console.log("UseEffect is firing");
+    // console.log("UseEffect is firing");
     loadDataFromEndpoint("snippets");
   }, []);
 
@@ -32,18 +32,13 @@ export default function App(): JSX.Element {
     setSelectedSnippet(snippet);
   };
 
-  const handleCreateClick = () => {
-    setSelectedSnippet(undefined);
-  };
-
-  const handleDeleteReload = () => {
-    console.log("handleDeleteReload firing in app component");
+  const handleRefreshAfterAction = () => {
     setSelectedSnippet(undefined);
   };
 
   return (
     <>
-      <NavBar handleCreateClick={handleCreateClick} />
+      <NavBar handleRefreshAfterAction={handleRefreshAfterAction} />
       <div className="container mt-5">
         <div className="row mx-auto">
           <div className="col-4">
@@ -62,7 +57,7 @@ export default function App(): JSX.Element {
               <ViewSnippet
                 snippet={selectedSnippet}
                 handleGetSnippets={loadDataFromEndpoint}
-                handleDeleteReload={handleDeleteReload}
+                handleRefreshAfterAction={handleRefreshAfterAction}
               />
             )}
           </div>
