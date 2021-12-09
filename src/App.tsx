@@ -49,7 +49,8 @@ export default function App(): JSX.Element {
               handleClickOnSnippet={handleClickOnSnippet}
             />
           </div>
-          <div className="col-8">
+          <div className="col-1"></div>
+          <div className="col-7">
             {!selectedSnippet && (
               <CreateSnippet handleGetSnippets={loadDataFromEndpoint} />
             )}

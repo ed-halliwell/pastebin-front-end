@@ -49,7 +49,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
       {edit ? (
         <div>
           <h4 className="mb-4">Edit Snippet</h4>
-          <div className="col-6 mx-4 w-100 view-box">
+          <div className="col-6 w-100 view-box">
             <form onSubmit={handleUpdate}>
               <div className="mb-3">
                 <label htmlFor="snippet-title" className="form-label">
