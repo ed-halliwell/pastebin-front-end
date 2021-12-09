@@ -21,6 +21,10 @@
   height: 46vh;
 }
 
+.copyIcon {
+  cursor: pointer;
+}
+
 .copyIcon:hover {
   color: rgba(161, 175, 177, 0.9);
 }

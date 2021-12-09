@@ -10,7 +10,7 @@
 }
 
 .overflow-auto {
-  max-height: 72vh;
+  max-height: 70vh;
   border-bottom: 1px lightgrey solid;
   box-shadow: 5px 4px 5px -1px rgba(0, 0, 0, 0.3);
 }
@@ -23,4 +23,16 @@
 
 .snippet-list {
   max-width: 70%;
+}
+
+.active {
+  color: white;
+}
+
+.active-pill {
+  border: 1px white solid;
+}
+
+.rounded-pill {
+  border: 1px white solid;
 }

@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
   const loadDataFromEndpoint = async (endpoint: string) => {
     try {
       const res = await axios.get(
-        `https://pastebin-academy.herokuapp.com/${endpoint}`
+        `https://pastebin-academy.herokuapp.com/${endpoint}?limit=100`
       );
       setSnippets(res.data.data);
     } catch (err) {
@@ -24,22 +24,21 @@ export default function App(): JSX.Element {
   };
 
   useEffect(() => {
-    console.log("UseEffect is firing");
+    // console.log("UseEffect is firing");
     loadDataFromEndpoint("snippets");
   }, []);
 
   const handleClickOnSnippet = (snippet: ISnippet) => {
-    //console.log("A snippet was clicked!:", snippet.id);
     setSelectedSnippet(snippet);
   };
 
-  const handleCreateClick = () => {
+  const handleRefreshAfterAction = () => {
     setSelectedSnippet(undefined);
   };
 
   return (
     <>
-      <NavBar handleCreateClick={handleCreateClick} />
+      <NavBar handleRefreshAfterAction={handleRefreshAfterAction} />
       <div className="container mt-5">
         <div className="row mx-auto">
           <div className="col-4">
@@ -49,7 +48,8 @@ export default function App(): JSX.Element {
               handleClickOnSnippet={handleClickOnSnippet}
             />
           </div>
-          <div className="col-8">
+          <div className="col-1"></div>
+          <div className="col-7">
             {!selectedSnippet && (
               <CreateSnippet handleGetSnippets={loadDataFromEndpoint} />
             )}
@@ -57,6 +57,7 @@ export default function App(): JSX.Element {
               <ViewSnippet
                 snippet={selectedSnippet}
                 handleGetSnippets={loadDataFromEndpoint}
+                handleRefreshAfterAction={handleRefreshAfterAction}
               />
             )}
           </div>

@@ -28,8 +28,8 @@ export default function CreateSnippet(props: Props): JSX.Element {
   return (
     <>
       <div>
-        <h4 className="mb-4 mx-4">Create New Snippet</h4>
-        <div className="col-6 mx-4 w-100 view-box">
+        <h4 className="mb-4">Create New Snippet</h4>
+        <div className="col-6 w-100 view-box">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="snippet-title" className="form-label">
@@ -50,7 +50,7 @@ export default function CreateSnippet(props: Props): JSX.Element {
               <label htmlFor="snippet-text" className="form-label">
                 Snippet Text
               </label>
-              <div className="input-group create-snippet-box">
+              <div className="input-group create-snippet-text-box">
                 <textarea
                   autoFocus
                   value={textInput}
