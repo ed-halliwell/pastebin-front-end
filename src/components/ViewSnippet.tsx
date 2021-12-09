@@ -3,7 +3,7 @@ import axios from "axios";
 import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-regular-svg-icons";
+import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
@@ -12,7 +12,8 @@ interface Props {
 export default function ViewSnippet(props: Props): JSX.Element {
   const [title, setTitle] = useState<string>(props.snippet.title);
   const [text, setText] = useState<string>(props.snippet.text);
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState<boolean>(false);
+  const [copyState, setCopyState] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(props.snippet.title);
@@ -38,11 +39,9 @@ export default function ViewSnippet(props: Props): JSX.Element {
   };
 
   function copyToClipboard() {
-    /* Copy the text inside the text field */
+    setCopyState(true);
     navigator.clipboard.writeText(text);
-
-    /* Alert the copied text */
-    // alert("Copied the text: " + text);
+    setTimeout(() => setCopyState(false), 1500);
   }
 
   return (
@@ -68,12 +67,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
               </div>
               <div className="mb-3">
                 <label htmlFor="snippet-text" className="form-label">
-                  Snippet Text{" "}
-                  <FontAwesomeIcon
-                    icon={faCopy}
-                    className="copyIcon"
-                    onClick={copyToClipboard}
-                  />
+                  Snippet Text
                 </label>
                 <div className="input-group create-snippet-box">
                   <textarea
@@ -111,14 +105,21 @@ export default function ViewSnippet(props: Props): JSX.Element {
               <p>{title}</p>
             </div>
             <div className="mb-3">
-              <label htmlFor="snippet-text" className="form-label">
-                Snippet Text{" "}
-                <FontAwesomeIcon
-                  icon={faCopy}
-                  className="copyIcon"
-                  onClick={copyToClipboard}
-                />
-              </label>
+              <div className="d-flex justify-content-between">
+                <label htmlFor="snippet-text" className="form-label">
+                  Snippet Text
+                </label>
+
+                {copyState ? (
+                  <label className="copied-successfully text-success">
+                    Copied to clipboard! <FontAwesomeIcon icon={faThumbsUp} />
+                  </label>
+                ) : (
+                  <label className="copyIcon" onClick={copyToClipboard}>
+                    Copy <FontAwesomeIcon icon={faCopy} className="copyIcon" />
+                  </label>
+                )}
+              </div>
               <div className="snippet-box">
                 <p className="snippet-text">{text}</p>
               </div>

@@ -28,3 +28,11 @@
 .active {
   color: white;
 }
+
+.active-pill {
+  border: 1px white solid;
+}
+
+.rounded-pill {
+  border: 1px white solid;
+}

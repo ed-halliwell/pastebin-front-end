@@ -49,7 +49,16 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
                     {trimSnippetText(snippet.text)}
                   </p>
                 </div>
-                <span className="badge bg-primary rounded-pill ">
+                <span
+                  className={
+                    "badge bg-primary rounded-pill " +
+                    (props.selectedSnippet &&
+                    props.selectedSnippet.id === snippet.id
+                      ? "active-pill"
+                      : "")
+                  }
+                >
+                  {/* <span className="badge bg-primary rounded-pill"> */}
                   {timestampConverter(snippet.createdat)}
                 </span>
               </li>
