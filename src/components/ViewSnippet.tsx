@@ -4,6 +4,8 @@ import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   snippet: ISnippet;
@@ -25,18 +27,34 @@ export default function ViewSnippet(props: Props): JSX.Element {
   }, [props.snippet]);
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await axios
-      .patch(`${baseUrl}/snippets/${props.snippet.id}`, {
-        title: title,
-        text: text,
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    setEdit(false);
-    props.handleGetSnippets("snippets");
+    if (text !== "") {
+      e.preventDefault();
+      await axios
+        .patch(`${baseUrl}/snippets/${props.snippet.id}`, {
+          title: title,
+          text: text,
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setEdit(false);
+      props.handleGetSnippets("snippets");
+    } else {
+      e.preventDefault();
+      showValidationError();
+    }
   };
+
+  const showValidationError = () =>
+    toast.warn("It seems like you're missing some text!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   function copyToClipboard() {
     setCopyState(true);
