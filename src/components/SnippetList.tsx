@@ -45,7 +45,6 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
                         : "")
                     }
                   >
-                    {/* <p className="monospace-text snippet-fragment"> */}
                     {trimSnippetText(snippet.text)}
                   </p>
                 </div>
@@ -58,7 +57,6 @@ export default function SnippetList(props: SnippetListProps): JSX.Element {
                       : "")
                   }
                 >
-                  {/* <span className="badge bg-primary rounded-pill"> */}
                   {timestampConverter(snippet.createdat)}
                 </span>
               </li>

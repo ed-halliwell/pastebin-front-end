@@ -50,7 +50,7 @@ export default function CreateSnippet(props: Props): JSX.Element {
               <label htmlFor="snippet-text" className="form-label">
                 Snippet Text
               </label>
-              <div className="input-group create-snippet-box">
+              <div className="input-group create-snippet-text-box">
                 <textarea
                   autoFocus
                   value={textInput}

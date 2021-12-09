@@ -7,6 +7,7 @@ import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
+  handleDeleteReload: () => void;
 }
 
 export default function ViewSnippet(props: Props): JSX.Element {
@@ -20,7 +21,6 @@ export default function ViewSnippet(props: Props): JSX.Element {
     setText(props.snippet.text);
   }, [props.snippet]);
 
-  //PATCH CALL with GET to refresh list of snippets
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios
@@ -43,6 +43,19 @@ export default function ViewSnippet(props: Props): JSX.Element {
     navigator.clipboard.writeText(text);
     setTimeout(() => setCopyState(false), 1500);
   }
+
+  const handleDelete = async () => {
+    await axios
+      .delete(
+        `https://pastebin-academy.herokuapp.com/snippets/${props.snippet.id}`
+      )
+      .catch(function (error) {
+        console.log(error);
+      });
+    setEdit(false);
+    props.handleGetSnippets("snippets");
+    props.handleDeleteReload();
+  };
 
   return (
     <>
@@ -96,8 +109,8 @@ export default function ViewSnippet(props: Props): JSX.Element {
         </div>
       ) : (
         <div>
-          <h4 className="mb-4 mx-4">View Snippet</h4>
-          <div className="col-6 mx-4 w-100 view-box">
+          <h4 className="mb-4">View Snippet</h4>
+          <div className="col-6 w-100 view-box">
             <div className="mb-3">
               <label htmlFor="snippet-title" className="form-label">
                 Snippet Title
@@ -125,6 +138,12 @@ export default function ViewSnippet(props: Props): JSX.Element {
               </div>
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button
+                className="btn btn-danger me-md-2"
+                onClick={() => handleDelete()}
+              >
+                Delete
+              </button>
               <button
                 className="btn btn-secondary me-md-2"
                 onClick={() => setEdit(true)}

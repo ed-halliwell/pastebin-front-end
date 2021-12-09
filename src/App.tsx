@@ -29,11 +29,15 @@ export default function App(): JSX.Element {
   }, []);
 
   const handleClickOnSnippet = (snippet: ISnippet) => {
-    //console.log("A snippet was clicked!:", snippet.id);
     setSelectedSnippet(snippet);
   };
 
   const handleCreateClick = () => {
+    setSelectedSnippet(undefined);
+  };
+
+  const handleDeleteReload = () => {
+    console.log("handleDeleteReload firing in app component");
     setSelectedSnippet(undefined);
   };
 
@@ -58,6 +62,7 @@ export default function App(): JSX.Element {
               <ViewSnippet
                 snippet={selectedSnippet}
                 handleGetSnippets={loadDataFromEndpoint}
+                handleDeleteReload={handleDeleteReload}
               />
             )}
           </div>
