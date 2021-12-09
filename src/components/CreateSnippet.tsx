@@ -7,7 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 interface Props {
   handleGetSnippets: (endpoint: string) => void;
 }
-const baseUrl = process.env.API_URL;
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pastebin-academy.herokuapp.com"
+    : "http://localhost:4000";
 
 export default function CreateSnippet(props: Props): JSX.Element {
   const [titleInput, setTitleInput] = useState<string>("");

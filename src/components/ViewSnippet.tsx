@@ -13,7 +13,10 @@ interface Props {
   handleRefreshAfterAction: () => void;
 }
 
-const baseUrl = process.env.API_URL;
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pastebin-academy.herokuapp.com"
+    : "http://localhost:4000";
 
 export default function ViewSnippet(props: Props): JSX.Element {
   const [title, setTitle] = useState<string>(props.snippet.title);
@@ -77,6 +80,17 @@ export default function ViewSnippet(props: Props): JSX.Element {
     <>
       {edit ? (
         <div>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <h4 className="mb-4">Edit Snippet</h4>
           <div className="col-6 w-100 view-box">
             <form onSubmit={handleUpdate}>
@@ -112,7 +126,10 @@ export default function ViewSnippet(props: Props): JSX.Element {
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button
                   className="btn btn-secondary me-md-2"
-                  onClick={() => setEdit(false)}
+                  onClick={() => {
+                    setEdit(false);
+                    setText(props.snippet.text);
+                  }}
                 >
                   Cancel
                 </button>
