@@ -10,7 +10,6 @@ import { ToastContainer } from "react-toastify";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function App(): JSX.Element {
-  console.log(baseUrl);
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
   const [selectedSnippet, setSelectedSnippet] = useState<ISnippet>();
 
