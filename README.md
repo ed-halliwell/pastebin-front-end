@@ -6,6 +6,14 @@ A simple application to allow the saving of text snippets.
 
 `yarn`
 
+## Setup
+
+Create a .env file and add `REACT_APP_API_URL` with a value to your liking.
+
+Example for a local server: `REACT_APP_API_URL=http://localhost:4000`
+
+You will need to add your own server when deploying to Netlify.
+
 ## Running locally
 
 `yarn start`
