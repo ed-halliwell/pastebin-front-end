@@ -5,6 +5,7 @@ import SnippetList from "./components/SnippetList";
 import CreateSnippet from "./components/CreateSnippet";
 import NavBar from "./components/NavBar";
 import ViewSnippet from "./components/ViewSnippet";
+import { ToastContainer } from "react-toastify";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
@@ -41,6 +42,17 @@ export default function App(): JSX.Element {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <NavBar handleRefreshAfterAction={handleRefreshAfterAction} />
       <div className="container mt-5">
         <div className="row mx-auto">

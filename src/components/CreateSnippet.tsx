@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "../styles/CreateSnippet.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
@@ -31,6 +31,7 @@ export default function CreateSnippet(props: Props): JSX.Element {
         });
       setTitleInput("");
       setTextInput("");
+      showCreateConfirmation();
       props.handleGetSnippets("snippets");
     } else {
       e.preventDefault();
@@ -39,15 +40,10 @@ export default function CreateSnippet(props: Props): JSX.Element {
   };
 
   const showValidationError = () =>
-    toast.warn("It seems like you're missing some text!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.warn("It seems like you're missing some text!");
+
+  const showCreateConfirmation = () =>
+    toast.success("✏️ You've created a paste!");
 
   const handleKeypress = (e: React.KeyboardEvent) => {
     //it triggers by pressing the enter key
@@ -59,17 +55,6 @@ export default function CreateSnippet(props: Props): JSX.Element {
   return (
     <>
       <div>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
         <h4 className="mb-4">Create New Snippet</h4>
         <div className="col-6 w-100 view-box">
           <form onSubmit={handleSubmit}>

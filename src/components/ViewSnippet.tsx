@@ -4,7 +4,7 @@ import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
@@ -40,7 +40,9 @@ export default function ViewSnippet(props: Props): JSX.Element {
         .catch(function (error) {
           console.log(error);
         });
+
       setEdit(false);
+      showUpdateConfirmation();
       props.handleGetSnippets("snippets");
     } else {
       e.preventDefault();
@@ -49,26 +51,13 @@ export default function ViewSnippet(props: Props): JSX.Element {
   };
 
   const showValidationError = () =>
-    toast.warn("It seems like you're missing some text!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.warn("It seems like you're missing some text!");
 
   const showDeleteConfirmation = () =>
-    toast.info("🦄 You've deleted the paste!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.info("🦄 You've deleted the paste!");
+
+  const showUpdateConfirmation = () =>
+    toast.success("😎 You've updated the paste!");
 
   function copyToClipboard() {
     setCopyState(true);
@@ -83,26 +72,15 @@ export default function ViewSnippet(props: Props): JSX.Element {
         console.log(error);
       });
     setEdit(false);
+    showDeleteConfirmation();
     props.handleGetSnippets("snippets");
     props.handleRefreshAfterAction();
-    showDeleteConfirmation();
   };
 
   return (
     <>
       {edit ? (
         <div>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
           <h4 className="mb-4">Edit Snippet</h4>
           <div className="col-6 w-100 view-box">
             <form onSubmit={handleUpdate}>
