@@ -37,7 +37,9 @@ export default function ViewSnippet(props: Props): JSX.Element {
         .catch(function (error) {
           console.log(error);
         });
-
+      if (title === "") {
+        setTitle("Untitled");
+      }
       setEdit(false);
       showUpdateConfirmation();
       props.handleGetSnippets("snippets");
