@@ -1,33 +1,75 @@
 import { useState } from "react";
 import axios from "axios";
 import "../styles/CreateSnippet.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   handleGetSnippets: (endpoint: string) => void;
 }
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pastebin-academy.herokuapp.com"
+    : "http://localhost:4000";
 
 export default function CreateSnippet(props: Props): JSX.Element {
   const [titleInput, setTitleInput] = useState<string>("");
   const [textInput, setTextInput] = useState<string>("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await axios
-      .post(`https://pastebin-academy.herokuapp.com/snippets`, {
-        title: titleInput,
-        text: textInput,
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    setTitleInput("");
-    setTextInput("");
-    props.handleGetSnippets("snippets");
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent
+  ) => {
+    if (textInput !== "") {
+      e.preventDefault();
+      await axios
+        .post(`${baseUrl}/snippets`, {
+          title: titleInput,
+          text: textInput,
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setTitleInput("");
+      setTextInput("");
+      props.handleGetSnippets("snippets");
+    } else {
+      e.preventDefault();
+      showValidationError();
+    }
+  };
+
+  const showValidationError = () =>
+    toast.warn("It seems like you're missing some text!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const handleKeypress = (e: React.KeyboardEvent) => {
+    //it triggers by pressing the enter key
+    if (e.key === "Enter" && !e.shiftKey) {
+      handleSubmit(e);
+    }
   };
 
   return (
     <>
       <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <h4 className="mb-4">Create New Snippet</h4>
         <div className="col-6 w-100 view-box">
           <form onSubmit={handleSubmit}>
@@ -60,6 +102,7 @@ export default function CreateSnippet(props: Props): JSX.Element {
                   className="form-control create-snippet-text"
                   aria-label="snippet"
                   autoComplete="off"
+                  onKeyPress={(e) => handleKeypress(e)}
                 ></textarea>
               </div>
             </div>

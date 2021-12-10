@@ -4,11 +4,19 @@ import { ISnippet } from "../utils/interfaces";
 import "../styles/ViewSnippet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface Props {
   snippet: ISnippet;
   handleGetSnippets: (endpoint: string) => void;
   handleRefreshAfterAction: () => void;
 }
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pastebin-academy.herokuapp.com"
+    : "http://localhost:4000";
 
 export default function ViewSnippet(props: Props): JSX.Element {
   const [title, setTitle] = useState<string>(props.snippet.title);
@@ -22,21 +30,45 @@ export default function ViewSnippet(props: Props): JSX.Element {
   }, [props.snippet]);
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await axios
-      .patch(
-        `https://pastebin-academy.herokuapp.com/snippets/${props.snippet.id}`,
-        {
+    if (text !== "") {
+      e.preventDefault();
+      await axios
+        .patch(`${baseUrl}/snippets/${props.snippet.id}`, {
           title: title,
           text: text,
-        }
-      )
-      .catch(function (error) {
-        console.log(error);
-      });
-    setEdit(false);
-    props.handleGetSnippets("snippets");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setEdit(false);
+      props.handleGetSnippets("snippets");
+    } else {
+      e.preventDefault();
+      showValidationError();
+    }
   };
+
+  const showValidationError = () =>
+    toast.warn("It seems like you're missing some text!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const showDeleteConfirmation = () =>
+    toast.info("🦄 You've deleted the paste!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   function copyToClipboard() {
     setCopyState(true);
@@ -46,21 +78,31 @@ export default function ViewSnippet(props: Props): JSX.Element {
 
   const handleDelete = async () => {
     await axios
-      .delete(
-        `https://pastebin-academy.herokuapp.com/snippets/${props.snippet.id}`
-      )
+      .delete(`${baseUrl}/snippets/${props.snippet.id}`)
       .catch(function (error) {
         console.log(error);
       });
     setEdit(false);
     props.handleGetSnippets("snippets");
     props.handleRefreshAfterAction();
+    showDeleteConfirmation();
   };
 
   return (
     <>
       {edit ? (
         <div>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <h4 className="mb-4">Edit Snippet</h4>
           <div className="col-6 w-100 view-box">
             <form onSubmit={handleUpdate}>
@@ -96,7 +138,11 @@ export default function ViewSnippet(props: Props): JSX.Element {
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button
                   className="btn btn-secondary me-md-2"
-                  onClick={() => setEdit(false)}
+                  onClick={() => {
+                    setEdit(false);
+                    setTitle(props.snippet.title);
+                    setText(props.snippet.text);
+                  }}
                 >
                   Cancel
                 </button>
