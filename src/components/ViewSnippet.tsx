@@ -59,6 +59,17 @@ export default function ViewSnippet(props: Props): JSX.Element {
       progress: undefined,
     });
 
+  const showDeleteConfirmation = () =>
+    toast.info("🦄 You've deleted the paste!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   function copyToClipboard() {
     setCopyState(true);
     navigator.clipboard.writeText(text);
@@ -74,6 +85,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
     setEdit(false);
     props.handleGetSnippets("snippets");
     props.handleRefreshAfterAction();
+    showDeleteConfirmation();
   };
 
   return (
@@ -128,6 +140,7 @@ export default function ViewSnippet(props: Props): JSX.Element {
                   className="btn btn-secondary me-md-2"
                   onClick={() => {
                     setEdit(false);
+                    setTitle(props.snippet.title);
                     setText(props.snippet.text);
                   }}
                 >
