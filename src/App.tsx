@@ -7,12 +7,10 @@ import NavBar from "./components/NavBar";
 import ViewSnippet from "./components/ViewSnippet";
 import { ToastContainer } from "react-toastify";
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://pastebin-academy.herokuapp.com"
-    : "http://localhost:4000";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function App(): JSX.Element {
+  console.log(baseUrl);
   const [snippets, setSnippets] = useState<ISnippet[]>([]);
   const [selectedSnippet, setSelectedSnippet] = useState<ISnippet>();
 

@@ -2,6 +2,17 @@
 
 A simple application to allow the saving of text snippets.
 
+## Install
+
+`yarn`
+
+## Running locally
+
+`yarn start`
+
+## running on netlify
+
+When the project is deployed to netlify, the build command will be automatically triggered on deployment and the built JS files will be run.
 
 - <a href="https://github.com/ed-halliwell/pastebin-front-end">Front End Application GitHub Repository</a>
 - <a href="https://github.com/ed-halliwell/pastebin-back-end">Back End Application GitHub Repository</a>

@@ -13,10 +13,7 @@ interface Props {
   handleRefreshAfterAction: () => void;
 }
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://pastebin-academy.herokuapp.com"
-    : "http://localhost:4000";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export default function ViewSnippet(props: Props): JSX.Element {
   const [title, setTitle] = useState<string>(props.snippet.title);
